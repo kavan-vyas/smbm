@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://i4exvn8ywqxqkr"]
+
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_0hdxr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hdxr"]
+size = Vector2(24, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1hdxr"]
+radius = 20.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_0hdxr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1hdxr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.2, 0.2, 1)
+texture = preload("res://icon.svg")
+scale = Vector2(0.2, 0.2)
+
+[node name="PushArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
+shape = SubResource("CircleShape2D_1hdxr")
+
+[connection signal="body_entered" from="PushArea" to="." method="_on_body_entered"]
